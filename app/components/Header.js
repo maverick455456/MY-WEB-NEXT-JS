@@ -5,7 +5,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
 
-  // Close modal when clicking outside or ESC key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -14,29 +13,17 @@ export default function Header() {
       }
     };
 
-    const handleClickOutside = (e) => {
-      if (e.target.classList.contains('modal-overlay')) {
-        setActiveModal(null);
-      }
-    };
-
     document.addEventListener('keydown', handleEscape);
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('click', handleClickOutside);
-    };
+    return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
-  // Disable scroll when modal is open
   useEffect(() => {
-    if (activeModal) {
-      document.body.style.overflow = 'hidden';
+    if (isMenuOpen || activeModal) {
+      document.body.classList.add('menu-open');
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.classList.remove('menu-open');
     }
-  }, [activeModal]);
+  }, [isMenuOpen, activeModal]);
 
   const openModal = (modalName) => {
     setActiveModal(modalName);
@@ -46,6 +33,15 @@ export default function Header() {
   const closeModal = () => {
     setActiveModal(null);
   };
+
+  const menuItems = [
+    { name: 'Home', action: () => { window.scrollTo({top: 0, behavior: 'smooth'}); setIsMenuOpen(false); } },
+    { name: 'About', action: () => openModal('about') },
+    { name: 'Skills', action: () => { document.getElementById('skills')?.scrollIntoView({behavior: 'smooth'}); setIsMenuOpen(false); } },
+    { name: 'Projects', action: () => { document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'}); setIsMenuOpen(false); } },
+    { name: 'Social Media', action: () => openModal('social') },
+    { name: 'Contact', action: () => openModal('contact') }
+  ];
 
   return (
     <>
@@ -70,20 +66,21 @@ export default function Header() {
 
       <nav className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
         <ul>
-          <li><a href="/" onClick={() => setIsMenuOpen(false)}>Home</a></li>
-          <li><a href="#" onClick={(e) => { e.preventDefault(); openModal('about'); }}>About</a></li>
-          <li><a href="#skills" onClick={() => setIsMenuOpen(false)}>Skills</a></li>
-          <li><a href="#projects" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
-          <li><a href="#" onClick={(e) => { e.preventDefault(); openModal('social'); }}>Social Media</a></li>
-          <li><a href="#" onClick={(e) => { e.preventDefault(); openModal('contact'); }}>Contact</a></li>
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <a href="#" onClick={(e) => { e.preventDefault(); item.action(); }}>
+                {item.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
       {/* About Modal */}
       {activeModal === 'about' && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <span className="close-modal" onClick={closeModal}>&times;</span>
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeModal}>&times;</button>
             <div className="modal-profile">
               <div className="modal-profile-container">
                 <div className="modal-light-ring"></div>
@@ -101,17 +98,20 @@ export default function Header() {
             <div className="modal-body">
               <div className="personal-details">
                 <div className="detail-item">
-                  <strong>Name:</strong> H.M. NIPUN DHANUJAYA
+                  <strong>Name:</strong>
+                  <span>H.M. NIPUN DHANUJAYA</span>
                 </div>
                 <div className="detail-item">
-                  <strong>Age:</strong> 18
+                  <strong>Age:</strong>
+                  <span>18</span>
                 </div>
                 <div className="detail-item">
-                  <strong>From:</strong> Sri Lanka
+                  <strong>From:</strong>
+                  <span>Sri Lanka</span>
                 </div>
                 <div className="detail-item">
-                  <strong>Contact:</strong> 
-                  <a href="https://wa.me/+94757255903" target="_blank"> +94 75 725 5903</a>
+                  <strong>Contact:</strong>
+                  <a href="https://wa.me/+94757255903" target="_blank">+94 75 725 5903</a>
                 </div>
               </div>
               
@@ -128,9 +128,9 @@ export default function Header() {
 
       {/* Social Media Modal */}
       {activeModal === 'social' && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <span className="close-modal" onClick={closeModal}>&times;</span>
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeModal}>&times;</button>
             <h2 style={{textAlign: 'center', marginBottom: '20px'}}>My Social Media</h2>
             <div className="social-grid">
               <a href="https://whatsapp.com/channel/0029Vb9bLMqGJP8GmAHxUd02/3683" target="_blank" className="social-item">
@@ -142,7 +142,7 @@ export default function Header() {
                 <p>Facebook Account</p>
               </a>
               <a href="https://www.facebook.com/share/17cgrxBQix/" target="_blank" className="social-item">
-                <i className="fab fa-facebook"></i>
+                <i className="fab fa-facebook-f"></i>
                 <p>Facebook Page</p>
               </a>
               <a href="https://vm.tiktok.com/ZSHc9tLctfuKo-3zM0Z/" target="_blank" className="social-item">
@@ -168,21 +168,37 @@ export default function Header() {
 
       {/* Contact Modal */}
       {activeModal === 'contact' && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <span className="close-modal" onClick={closeModal}>&times;</span>
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeModal}>&times;</button>
             <h2 style={{textAlign: 'center', marginBottom: '20px'}}>Contact Me</h2>
             <div className="modal-body">
               <p>If you'd like to get in touch with me, please use the following contact information:</p>
-              <ul style={{margin: '15px 0', paddingLeft: '20px'}}>
-                <li style={{marginBottom: '10px'}}><strong>Email:</strong> mrnipun@techweb.com</li>
-                <li style={{marginBottom: '10px'}}><strong>Phone:</strong> 
-                  <a href="https://wa.me/+94757255903" style={{color: 'var(--primary-red)', textDecoration: 'none', marginLeft: '5px'}}>
-                    +94 75 725 5903
-                  </a>
-                </li>
-                <li style={{marginBottom: '10px'}}><strong>Location:</strong> Sri Lanka</li>
-              </ul>
+              <div className="contact-info">
+                <ul>
+                  <li>
+                    <i className="fas fa-envelope"></i>
+                    <div>
+                      <strong>Email:</strong> 
+                      <span>mrnipun@techweb.com</span>
+                    </div>
+                  </li>
+                  <li>
+                    <i className="fas fa-phone"></i>
+                    <div>
+                      <strong>Phone:</strong> 
+                      <a href="https://wa.me/+94757255903">+94 75 725 5903</a>
+                    </div>
+                  </li>
+                  <li>
+                    <i className="fas fa-map-marker-alt"></i>
+                    <div>
+                      <strong>Location:</strong> 
+                      <span>Sri Lanka</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
               <p>You can also reach out to me through my social media profiles for a quicker response.</p>
             </div>
           </div>
@@ -190,4 +206,4 @@ export default function Header() {
       )}
     </>
   );
-}
+  }
