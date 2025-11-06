@@ -1,6 +1,5 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
@@ -11,7 +10,6 @@ export default function Home() {
       <Header />
       <div className="container">
         <Hero />
-        <About />
         <Skills />
         <Projects />
         <Footer />
@@ -21,4 +19,4 @@ export default function Home() {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     </main>
   );
-    }
+        }
