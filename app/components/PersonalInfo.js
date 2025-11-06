@@ -5,32 +5,33 @@ export default function PersonalInfo() {
       <div className="info-grid">
         <div className="info-item">
           <i className="fas fa-user"></i>
-          <div>
-            <strong>Name:</strong> H.M. NIPUN DHANUJAYA
+          <div className="info-content">
+            <strong>Name:</strong>
+            <span>H.M. NIPUN DHANUJAYA</span>
           </div>
         </div>
         <div className="info-item">
           <i className="fas fa-birthday-cake"></i>
-          <div>
-            <strong>Age:</strong> 18
+          <div className="info-content">
+            <strong>Age:</strong>
+            <span>18</span>
           </div>
         </div>
         <div className="info-item">
           <i className="fas fa-map-marker-alt"></i>
-          <div>
-            <strong>From:</strong> Sri Lanka
+          <div className="info-content">
+            <strong>From:</strong>
+            <span>Sri Lanka</span>
           </div>
         </div>
         <div className="info-item">
           <i className="fas fa-phone"></i>
-          <div>
-            <strong>Contact:</strong> 
-            <a href="https://wa.me/+94757255903" target="_blank">
-              +94 75 725 5903
-            </a>
+          <div className="info-content">
+            <strong>Contact:</strong>
+            <a href="https://wa.me/+94757255903" target="_blank">+94 75 725 5903</a>
           </div>
         </div>
       </div>
     </section>
   );
-    }
+}
