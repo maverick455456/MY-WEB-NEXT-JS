@@ -16,10 +16,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed-header">
-        <div className="header-content">
-          <div className="logo">
-            <div className="logo-text">MR NIPUN OFC / TECH-WEB</div>
+      <header className="glass-nav">
+        <div className="nav-container">
+          <div className="brand">
+            <div className="brand-logo">MR NIPUN OFC / TECH-WEB</div>
           </div>
           <div 
             className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
