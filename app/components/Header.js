@@ -121,7 +121,7 @@ export default function Header() {
                 <li style={{marginBottom: '10px'}}><strong>Email:</strong> mrnipun@techweb.com</li>
                 <li style={{marginBottom: '10px'}}><strong>Phone:</strong> 
                   <a href="https://wa.me/+94757255903" style={{color: 'var(--primary-red)', textDecoration: 'none', marginLeft: '5px'}}>
-                    +94 75 725 5903
+                    +94757255903
                   </a>
                 </li>
                 <li style={{marginBottom: '10px'}}><strong>Location:</strong> Sri Lanka</li>
