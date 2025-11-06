@@ -845,4 +845,4 @@ body.menu-open::before {
   background: rgba(0, 0, 0, 0.5);
   z-index: 98;
   backdrop-filter: blur(5px);
-    }
+  }
