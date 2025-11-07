@@ -1,21 +1,21 @@
 export default function Projects() {
   const projects = [
-    { 
-      title: 'MHT Website', 
-      description: 'A modern website for MHT with responsive design and interactive features.' 
+    {
+      title: 'MHT Website',
+      description: 'A modern website for MHT with responsive design and interactive features.'
     },
-    { 
-      title: 'E-commerce Platform', 
-      description: 'Full-stack e-commerce solution with payment integration and admin dashboard.' 
+    {
+      title: 'E-commerce Platform',
+      description: 'Full-stack e-commerce solution with payment integration and admin dashboard.'
     },
-    { 
-      title: 'IoT Home Automation', 
-      description: 'Smart home system using Arduino and mobile app control.' 
+    {
+      title: 'IoT Home Automation',
+      description: 'Smart home system using Arduino and mobile app control.'
     }
   ];
 
   return (
-    <section className="projects-section" id="projects">
+    <section className="projects-section" id="projects-link">
       <h2 className="section-title">My Projects</h2>
       <div className="projects-grid">
         {projects.map((project, index) => (
