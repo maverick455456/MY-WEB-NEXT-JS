@@ -1,14 +1,18 @@
 export default function Footer() {
+  const openModal = (modalId) => {
+    document.getElementById(modalId).classList.add('active');
+  };
+
   return (
     <footer>
       <div className="footer-links">
-        <a href="#">Home</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</a>
+        <a onClick={() => openModal('about-modal')}>About</a>
+        <a onClick={() => openModal('contact-modal')}>Contact</a>
+        <a onClick={() => openModal('privacy-modal')}>Privacy Policy</a>
       </div>
       <div className="copyright">
-        &copy; 2024 MR NIPUN OFC / TECH-WEB. All Rights Reserved.
+        &copy; 2025 MR NIPUN OFC / TECH-WEB. All Rights Reserved.
       </div>
     </footer>
   );
